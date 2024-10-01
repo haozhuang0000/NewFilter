@@ -1,5 +1,5 @@
 import os
-from scripts.logger.exceptions import ModelNotFoundError
+from scripts.exceptions.exceptions import ModelNotFoundError
 from langchain_community.llms import Ollama
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
