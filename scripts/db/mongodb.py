@@ -28,4 +28,4 @@ class MongoDBHandler:
 if __name__ == '__main__':
 
     mongodb_handler = MongoDBHandler()
-    len_data = mongodb_handler.insert_raw_data()
+    mongodb_handler.get_database()
