@@ -1,6 +1,5 @@
 from langchain.prompts import PromptTemplate
 
-
 class NewsFilterExpertPrompt:
     """
     A class to generate and manage prompts for a world-renowned financial expert assistant.
@@ -15,11 +14,24 @@ class NewsFilterExpertPrompt:
         Initializes the NewsFilterExpertPrompt with a predefined template.
         """
         self._template: str = """
-            {context}
+            You are an expert financial analyst. Based on the provided news article, determine if each of the following factors is present (1) or absent (0). Only consider the content of the article.
 
-            The ONLY Question for you to answer: {input}
+            Provide your answer in the following JSON format, using the exact factor descriptions as keys:
+
+            {json_example}
+
+            Article:
+            \"\"\"
+            {article}
+            \"\"\"
+
+            Factors:
+            {factors}
         """
-        self._prompt_template: PromptTemplate = PromptTemplate.from_template(self._template)
+        self._prompt_template: PromptTemplate = PromptTemplate(
+            input_variables=["article", "factors", "json_example"],
+            template=self._template
+        )
 
     def get_prompt_template(self) -> PromptTemplate:
         """
