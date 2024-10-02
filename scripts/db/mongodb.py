@@ -21,7 +21,9 @@ if __name__ == '__main__':
 
     mongodb_handler = MongoDBHandler()
     db = mongodb_handler.get_database()
-    print(db)
     col = db[os.environ['NEWS_COLLECTION']]
-    test_data = col.aggregate([{'$sample': {'size': 100}}])
-    test_data_list = list(test_data)
+    print(col)
+    top_items = col.find().sort("Storage_date", -1).limit(3)
+    print(top_items)
+    for item in top_items:
+        print(item['Content'])
