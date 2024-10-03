@@ -35,7 +35,7 @@ Contains modules related to the filtering process:
 
 Implements the logic behind the filtering process:
 
-- Retrieves the top 3 most recent articles from the database.
+- Retrieves the top 3 most recent Wall street journal articles from the database.
 - Feeds the 'content' section of each article into the `get_filter()` function.
   - Makes one call of `get_filter()` for each large category to obtain scores for each subcategory.
 - Aggregates all the scores and compiles them into an `.xlsx` file:
