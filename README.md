@@ -24,7 +24,12 @@ Contains modules related to the filtering process:
 - **`categories.py`**: Defines all the main categories and subcategories used for classification.
 - **`llm.py`**: Provides an LLM wrapper around a model using LangChain. Currently, `ChatOpenAI` is used due to familiarity.
 - **`news_filter.py`**: Contains the `get_filter()` function, which makes an LLM call to obtain the evaluation results for a single article.
+  - Currently the json output format is dynamically specified in the prompt.
 - **`prompts.py`**: Holds the prompt template used by the LLM.
+  - Includes the following variables:
+    - `json_example`: The example output format.
+    - `article`: The article to be processed.
+    - `factors`: The list of factors to judge the article on.
 
 ### `main.py`
 
