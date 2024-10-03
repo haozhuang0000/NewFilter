@@ -16,14 +16,3 @@ class MongoDBHandler:
         """
         db = self.client[DB]
         return db
-
-if __name__ == '__main__':
-
-    mongodb_handler = MongoDBHandler()
-    db = mongodb_handler.get_database()
-    col = db[os.environ['NEWS_COLLECTION']]
-    print(col)
-    top_items = col.find().sort("Storage_date", -1).limit(3)
-    print(top_items)
-    for item in top_items:
-        print(item['Content'])
