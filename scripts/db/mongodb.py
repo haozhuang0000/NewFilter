@@ -2,10 +2,9 @@ from pymongo import MongoClient
 import os
 import pandas as pd
 from dotenv import load_dotenv, find_dotenv
-_ = load_dotenv(find_dotenv())
+_ = load_dotenv(override=True)
 
 class MongoDBHandler:
-
     def __init__(self):
         super().__init__()
         self.DB_URL = os.environ['MONGODB_URL']
