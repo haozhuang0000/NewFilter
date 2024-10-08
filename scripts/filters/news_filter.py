@@ -98,7 +98,7 @@ class NewsFilter:
         # Generate the JSON example with the actual company names
         json_example = {
             "relevance_scores": {
-                company_name: "score between 0 and 1" for company_name in company_names
+                company_name: "score between 0 and 2" for company_name in company_names
             }
         }
         json_example_str = json.dumps(json_example, indent=4)

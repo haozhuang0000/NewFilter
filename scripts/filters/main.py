@@ -168,5 +168,5 @@ def main(num_articles):
         print(f"{company_name}: {score}")
 
 if __name__ == "__main__":
-    num_articles = 1
+    num_articles = 10
     main(num_articles)

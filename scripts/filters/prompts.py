@@ -49,7 +49,13 @@ class CompanyRelevancePrompt:
 
     def __init__(self):
         self._template: str = """
-            You are an expert financial analyst. Based on the provided news article, assess how related the article is to each of the following companies. Provide a relevance score between 0 and 1 for each company, where 0 means not related at all and 1 means highly related.
+            You are an expert financial analyst. Based on the provided news article, assess how related the article is to each of the following companies. Provide a relevance score between 0 and 2 for each company, where:
+
+            - **0**: The company isn't mentioned at all in the news.
+            - **1**: The company is mentioned but isn't the main focus.
+            - **2**: The company is most mentioned or is the main focus of the news.
+
+            **Important**: Carefully determine if the news is talking about the specific company listed or a different company with a similar name. Pay close attention to company identifiers such as "Inc.", "Ltd.", or country-specific designations to avoid confusion (e.g., "Tesla Inc" vs. "Tesla a.s.").
 
             Provide your answer in the following JSON format, using the exact company names as keys:
 
