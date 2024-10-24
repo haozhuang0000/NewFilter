@@ -1,51 +1,47 @@
 categories = {
     "Macroeconomics": [
-        "Interest Rate: announcement of interest rate, announcement of interest rate forecast, significant changes of treasury bond prices, or anything about central bank comments or central bank policies related to interest rate",
-        "Exchange Rate: anything directly related to exchange rates in USD or other currency",
-        "GDP",
+        "Interest Rate:  the central bank interest rate policy, including announcement of interest rate, announcement of interest rate forecast, comments from central bankers",
+        "Exchange Rate: anything directly related to exchange rates in USD or other currency of the focal country",
+        "GDP of the focal country, including C+I+G+X-M, which means “Trade Balance and Export/Import Data” is also included",
         "Unemployment rate or unemployment claims: any macroeconomic indicators related to unemployment",
         "Inflation rate announcements",
         "Purchasing Managers' Index",
         "Consumer Confidence Index",
-        "Other macroeconomic indicators announcements."
+        "Other macroeconomic indicators announcements.",
+        "Debt-to-GDP Ratio, including Fiscal Deficit / Government Debt Levels, which is relevant to long-term interest rate of government bonds.",
+        "Industrial Production Index",
+        "Retail Sales Data",
+        "Other macroeconomic indicators announcements.",
+        "Unique Macro-Economic Events - Global Credit Conditions: Global liquidity and risk appetite influence credit ratings across sectors. For example, during a global financial crisis, investors become more risk-averse and credit risk go up",
+        "Unique Macro-Economic Events - Political and Regulatory Risk: Changes in government, geopolitical tensions, or regulatory shifts (e.g., changes in trade policies, taxation, sanctions) can significantly impact the perceived risk of default.",
+        "Unique Macro-Economic Events - Natural Disasters"
     ],
-    "Unique one-time event": [
-        "Change of CEO or other important executives: executive hiring, firing, management changes, board member changes",
-        "Massive layoff",
-        "Legal issues: being sued, suing other companies, or court decisions about penalties or winning of lawsuits",
-        "Announcement of an important new investment. This includes R&D investments, expanding into new product categories, expanding into new geographical markets, or expansion of capacity including new facilities or new mines.",
-        "Delay of an important new product introduction",
-        "An important new product introduction",
-        "M&A (Mergers and Acquisitions)",
-        "Strategic partnerships, collaborations, and joint ventures",
-        "Natural disasters",
-        "War or tension between any two countries or in the Middle East",
-        "Broadly defined financial distress or accounting fraud: bankruptcy, default, inability to pay suppliers or employees, any kind of accounting frauds, any significant cash flow issues, restructuring of debt, restructuring of the firm",
-        "Changes in any government regulation and tax law affecting the company’s demand and supply, excluding central bank’s monetary policy",
-        "Political elections"
+    "Industry": [
+        "Competitive Pressures: the level of competition within the industry",
+        "Industry Market Size and Growth Trends: market size projections, growth rates, and market segmentation of the industry",
+        "Commodity Prices: relevant commodity prices for selected industries",
+        "Housing Market Indicators: housing-related indicators for housing industries",
+        "Economic and Industry Cyclicality: impact of economic cycles on company profitability, applicable for cyclical industries",
+        "Barriers to Entry and Exit: factors affecting entry or exit difficulty in the industry and its impact on credit risk, applicable where threat of entrants is significant",
+        "Other Industry-Specific Drivers: Key industry-specific factors affecting credit risk, such as supply chain dynamics, input cost volatility, technological advancements, or consumer demand shifts"
     ],
-    "Capital market": [
-        "Announcement or expected change of dividend",
-        "Announcement or expected stock split",
-        "Announcement or expected stock repurchase",
-        "Announcement or expected insider trading: significant shareholders buying or selling shares, or famous investors buying or selling the focal company’s stocks",
-        "Announcement or expected change of large shareholder of the focal firm (not about the change of ownership of parent company or subsidiary)",
-        "Announcement or expected issuance of new equities",
-        "Announcement or expected changes in liabilities and debt",
-        "Investment analysts’ recommendation rating changes",
-        "Credit rating changes from three major credit rating agencies",
-        "Explanations by stock investment’s charting or technical analysis"
+    "Debt and Financing": [
+        "Leverage and Capital Structure: capital structure, financial sustainability, debt covenants, and growth risk management",
+        "Debt Levels and Maturities: summary of outstanding debt, key instruments, and upcoming debt maturities",
+        "Debt Repayment and Coverage: interest coverage, debt service coverage ratios (DSCR), free cash flow to debt, and ability to meet debt obligations",
+        "Cash Flow Generation: evaluation of operating, investing, and financing cash flows, with a focus on free cash flow generation",
+        "Liquidity and Refinancing: short-term financial health, cash reserves, access to capital, and refinancing strategies",
+        "Financial Policies: strategic financial decisions, dividend policies, share repurchases, and capital allocation strategies",
+        "Contingent Liabilities: off-balance-sheet liabilities, such as pension obligations, lawsuits, or guarantees, that may impact financial position"
     ],
-    "Product market and production": [
-        "Any factors causing the supply of the focal product to increase or decrease, including more or fewer competitors, new entrants, major competitor exits, increased or decreased production from suppliers, or changes in inventory levels of firms (excluding factors about the focal firm’s own capacity/supply changes)",
-        "Any factors causing the demand of the focal product to increase or decrease at the industry level, including factors about long-term growth or shrinkage of the product market’s demand and average pricing of products in the industry (excluding firm-level demand increases due to market share gains)",
-        "Any factors about the focal firm’s market share changes, or the demand for the focal firm’s product increasing or decreasing",
-        "Supply chain disruptions of key inputs (e.g., raw materials, key components, labor union issues, labor strikes, or wage increases) for the focal firm; similarly, increases or decreases in the price of input factors for the focal firm"
-    ],
-    "Financial outcomes": [
-        "Earnings announcement, excluding earnings guidance (EPS)",
-        "Profit margin or gross margin increases or decreases",
-        "Write-off of a one-time significant loss",
-        "One-time significant gain/profit"
+    "Operational Performance": [
+        "Revenue and Profitability: historical and projected revenues, gross, operating, net margins, and EBITDA, with trends in profitability",
+        "Pricing Strategy: company's pricing power and strategy, including ability to raise prices without losing market share",
+        "Customer Base and Revenue Diversification: diversity of the customer base and revenue sources, risk from reliance on a few customers or markets",
+        "Cost Structure and Operational Efficiency: management of production and operational costs, fixed vs. variable costs, labor efficiency, and cost-saving measures",
+        "Production Capacity and Utilization Rates: maximum production capacity and utilization rates, efficiency in resource use and scaling potential",
+        "Supply Chain Resilience and Management: supply chain structure, ability to manage disruptions, diversify suppliers, and maintain steady production",
+        "Technological Innovation and R&D: Investment in technology and R&D, contribution to competitive advantage, cost efficiency, and long-term profitability",
+        "Distribution Network and Dealer Relationships: Effectiveness of distribution channels, dealer relationships, and sustaining profitability through sales channels"
     ]
 }

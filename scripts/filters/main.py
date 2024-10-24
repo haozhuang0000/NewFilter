@@ -5,11 +5,12 @@ import time
 import numpy as np
 sys.path.append(r'../../')
 sys.path.append(r'../')
-from llm import Llm
+from llm import Llm_OPENAI, Llm
 from news_filter import NewsFilter
 from categories import categories
 from dotenv import load_dotenv, find_dotenv
 import pandas as pd
+from tqdm import tqdm
 from db import mongodb
 load_dotenv(find_dotenv())
 
@@ -17,11 +18,20 @@ def main(num_articles):
     mongodb_handler = mongodb.MongoDBHandler()
     db = mongodb_handler.get_database()
     col = db[os.environ['NEWS_COLLECTION']]
-
-    top_items = col.find().sort("Storage_date", -1).limit(num_articles)
-
+    col_out = db[os.environ['FILTERED_COLLECTION']]
+    input_col = col.find().sort("Storage_date", -1).limit(num_articles)
+    check_col_ids = col_out.find({})
+    input_col_ids_list = []
+    check_col_ids_list = []
+    for item in tqdm(input_col):
+        input_col_ids_list.append(item["_id"])
+    for item in tqdm(check_col_ids):
+        check_col_ids_list.append(item["_id"])
+    clear_input_list = list(set(input_col_ids_list).difference(set(check_col_ids_list)))
+    print(f"Number of article: {len(clear_input_list)}")
+    find_cursor = col.find({"_id": {'$in': clear_input_list}})
     # Initialize the LLM
-    llm = Llm(model='llama3.1:8b')
+    llm = Llm_OPENAI(model='gpt-4o-mini', openai_api_key=os.environ['API_KEY'])
 
     # Initialize the NewsFilter
     news_filter = NewsFilter(llm=llm, categories=categories)
@@ -30,7 +40,7 @@ def main(num_articles):
     summary_list = []
     processed_time = []
     # Iterate over the articles
-    for item in top_items:
+    for item in find_cursor:
         start_time = time.time()
         article_content = item['content']
 
@@ -153,7 +163,7 @@ def main(num_articles):
     mongodb_handler.insert_db(
         df_merge[['_id', 'Date', 'Title', 'Url', 'Level0_Categories', 'Level1_Categories', 'Company_scores']],
         dbs_name='CAESARS',
-        col_name='test_filter'
+        col_name=os.environ['FILTERED_COLLECTION']
     )
 
     # Optionally, print the last article's analysis results
@@ -167,6 +177,27 @@ def main(num_articles):
     for company_name, score in relevance_scores.items():
         print(f"{company_name}: {score}")
 
+def main_importance():
+    mongodb_handler = mongodb.MongoDBHandler()
+
+    llm = Llm_OPENAI(model='gpt-4o', openai_api_key=os.environ['API_KEY'])
+    # Initialize the NewsFilter
+    news_filter = NewsFilter(llm=llm, categories=categories)
+    companies = ['American Express Co', 'Chevron Corp', 'Exxon Mobil Corp', "Macy's Inc",
+                 'Ford Motor Co', 'ConocoPhillips', 'Tesla Inc', 'Discover Financial Services',
+                 'AMC Entertainment Holdings Inc', 'Visa Inc', 'General Motors Co', 'Mastercard Inc']
+    for company in companies:
+        results = news_filter.get_company_importance(company)
+        mongodb_handler.insert_db(
+            [results],
+            dbs_name='CAESARS',
+            col_name='Company_Importance'
+        )
+        print(results)
+
 if __name__ == "__main__":
-    num_articles = 10
-    main(num_articles)
+
+    for i in range(310, 2200, 10):
+        num_articles = i
+        main(num_articles)
+    # main_importance()

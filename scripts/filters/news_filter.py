@@ -1,6 +1,6 @@
 import json
 from typing import Dict, List
-from prompts import NewsFilterExpertPrompt, CompanyRelevancePrompt
+from prompts import NewsFilterExpertPrompt, CompanyRelevancePrompt, CompanyImportance
 from llm import Llm
 
 class NewsFilter:
@@ -16,6 +16,7 @@ class NewsFilter:
         self.categories = categories
         self.news_filter_prompt_template = NewsFilterExpertPrompt().get_prompt_template()
         self.company_relevance_prompt_template = CompanyRelevancePrompt().get_prompt_template()
+        self.company_importance_prompt_template = CompanyImportance().get_prompt_template()
 
     def get_filter(self, article_text: str) -> Dict[str, Dict[str, int]]:
         """
@@ -137,3 +138,57 @@ class NewsFilter:
             print(f"Error parsing JSON response for company relevance: {e}")
             # Assign None or handle accordingly
             return {company_name: None for company_name in company_names}
+
+    def get_company_importance(self, company_name: str) -> Dict[str, float]:
+
+        results = {'Company_Name': company_name}
+
+        for large_category, factors in self.categories.items():
+            print(f"Analyzing category: {large_category}")
+
+            # Format the factors list
+            factors_list = '\n'.join(f"- {factor}" for factor in factors)
+
+            # Generate the JSON example with the actual factors
+            json_example = {
+                "results": {
+                    factor: "1 to 10" for factor in factors
+                }
+            }
+            json_example_str = json.dumps(json_example, indent=4)
+
+            # Generate the prompt using the prompt template
+            prompt = self.company_importance_prompt_template.format(
+                companies=company_name,
+                factors=factors_list.strip(),
+                json_example=json_example_str
+            )
+
+            # Make the LLM call
+            response = self.llm(prompt)
+
+            # Parse the response
+            try:
+                # Extract the JSON part from the response
+                json_start = response.find('{')
+                json_end = response.rfind('}') + 1  # Find the last '}'
+                json_str = response[json_start:json_end]
+
+                # Remove any backticks and extra whitespace
+                json_str = json_str.strip().strip('`')
+
+                # Parse the JSON string
+                response_json = json.loads(json_str)
+
+                # Add the results to the main dictionary
+                factors_results = response_json.get('results', {})
+                # Convert string scores to integers
+                factors_results = {factor: int(score) for factor, score in factors_results.items()}
+                results[large_category] = factors_results
+            except (json.JSONDecodeError, ValueError) as e:
+                print(f"Error parsing JSON response for category '{large_category}': {e}")
+                # Assign None or handle accordingly
+                results[large_category] = {factor: None for factor in factors}
+
+        return results
+

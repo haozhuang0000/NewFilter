@@ -78,3 +78,38 @@ class CompanyRelevancePrompt:
 
     def get_prompt_template(self) -> PromptTemplate:
         return self._prompt_template
+
+
+class CompanyImportance:
+    """
+    A class to generate and manage prompts for assessing the relevance of a news article to specific companies.
+    """
+
+    def __init__(self):
+        self._template: str = """
+            You are an expert financial analyst. You will be provided with a dictionary, base on your own understanding and knowledge of this company, you will need to give a importance score (1 to 10) for each factories for this company.
+            
+            Dictionaries:
+            \"\"\"
+            {factors}
+            \"\"\"
+            
+            Company:
+            {companies}
+            
+            Provide your answer in the following JSON format, using the exact company names as keys:
+            {json_example}
+            
+            You need to think and provide answer base on following steps, you can think longer:
+
+            1. Understand this company first
+            2. Provide score for each factor base on your understanding and knowledge
+            3. You do not need to put your understanind into the json output, only output the factors
+        """
+        self._prompt_template: PromptTemplate = PromptTemplate(
+            input_variables=["factors", "companies", "json_example"],
+            template=self._template
+        )
+
+    def get_prompt_template(self) -> PromptTemplate:
+        return self._prompt_template
